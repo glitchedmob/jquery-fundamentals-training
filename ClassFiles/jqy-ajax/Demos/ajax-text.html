@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Testing Ajax with HTML</title>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$(document).ready(function() {
+	$.ajax("data/blurb.html", {
+			type: "get",
+			dataType: "html",
+			success: function(data) {
+				$('#results1').html(data);
+			},
+			error: function(xhr, status, err) {
+				$('#results1').html("Error " + status + ", " + err);
+			}
+		} );
+	$('#results2').load("data/blurb.html");
+});
+</script>
+</head>
+<body>
+<h1>Here is the Ajax we received via $.ajax:</h1>
+<div id="results1"></div>
+<h1>Here is the Ajax we received via $.load:</h1>
+<div id="results2"></div>
+</body>
+</html>

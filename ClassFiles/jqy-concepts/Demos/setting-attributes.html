@@ -1,0 +1,19 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$(document).ready(function() {
+	$('a').attr({ 
+			'title' : 'all titles are the same too!', 
+			'href' : 'allMyHrefsAreTheSameNow.html' 
+	});
+	$('a:first').attr('href', 'somethingNew.html');
+});
+</script>
+</head>
+<body>
+<a href="#">Home</a>
+<a href="#">Top</a>
+<a href="#">Up</a>
+</body>
+</html>

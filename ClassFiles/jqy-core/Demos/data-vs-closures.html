@@ -1,0 +1,69 @@
+<!doctype HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Data vs Closures</title>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+jQuery(document).ready(function() {
+
+	// Using data to remember a paragraph under an h2
+	$('#dataDiv>h2').each(function() {
+		var $h2 = $(this);
+		var $p = $h2.next('p');		
+		$h2.data('para', $p);		
+	});
+
+	// Later, from separate code, we don't have to find the p tag again,
+	// we can just read it from the h2 element's data
+	$('#dataHeading').click(
+		function(e) {
+			$(this).data('para').html('New Content from Data');
+		}
+	);
+
+	// We can also access an element's data from totally unrelated code
+	$('#other').click(
+		function(e) {
+			$('#dataHeading').data('para')
+				.html('New Content from unrelated code');
+		}
+	);
+		
+	// Using closure
+	$('#closureDiv>h2').each(function() {
+		var $h2 = $(this);
+		var $p = $h2.next('p');
+		// Click handler using a closure of $p to find the paragraph
+		$h2.click(
+			function(e) {
+				$p.html('New Content from Closure');
+			}
+		);
+	});
+
+	// But, there is no way to access that closure from code
+	// outside of the each function above.
+	
+});
+</script>
+</head>
+<body>
+<h1>Data and Closures</h1>
+<h2>For "Remembering" Data Associated with an Element</h2>
+<hr />
+<div id="dataDiv">
+	<h2 id="dataHeading">Using Data</h2>
+	<p>Click the heading above to see information from data.</p>
+</div>
+<hr>
+<div id="closureDiv">
+	<h2>Using Closures</h2>
+	<p>Click the heading above to see information from closure.</p>
+</div>
+<hr>
+<div>
+	<h3 id="other">Click here to access data from unrelated code.</h3>
+</div>
+</body>
+</html>

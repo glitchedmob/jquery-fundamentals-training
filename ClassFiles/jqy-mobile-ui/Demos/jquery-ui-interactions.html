@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Interactions</title>
+	<script src="../../jqy-libs/jquery.js"></script>
+	<script src="../../jqy-libs/jquery-ui-1.10.3.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../jqy-libs/ui-lightness/jquery-ui-1.10.3.custom.min.css">
+	<script>
+		$(document).ready(function() {
+			$('#draggable').draggable();
+			$('#droppable').droppable({
+				drop: function(event, ui) {
+					$(this)
+					.addClass('dropped')
+					.find('h2')
+					.html('Dropped');
+				}
+			});
+			$('#resizable').resizable();
+			$('#selectable').selectable();
+			$('#sortable').sortable();
+		});
+	</script>
+	<style>
+		.container {
+			width:30%;
+			margin:0 1% 1% 0;
+			float:left;
+			height:200px;
+			background-color:#fbb;
+			padding:1%;
+		}
+		.widecontainer {
+			width:98%;
+			margin-bottom:1%;
+			clear:left;
+			background-color:#fbb;
+			height:100px;
+		}
+		.contained {
+			width:90px;
+			height:90px;
+			padding:10px;
+			background-color:#c00;
+		}
+		h3 {
+			float:right;
+			font-size:14px;
+			font-weight:bold;
+			color:#444;
+			margin:5px 5px 0 0;
+		}
+		.dropped {
+			background-color:#fff;
+		}
+		ul {
+			list-style:none;
+			margin:0;
+			padding:0;
+		}
+		ul li {
+			float:left;
+			margin:20px 10px 0 10px;
+			padding:5px 15px;
+			background-color:#c00;
+		}
+		#selectable .ui-selecting {
+			background-color: #600;
+		}
+		#selectable .ui-selected {
+			background-color: #000;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+<div id="draggablecontainer" class="container">
+	<h3>Draggable</h3>
+	<div id="draggable" class="contained">Drag Me</div>
+</div>
+<div id="droppable" class="container">
+	<h3>Droppable</h3>
+	<h2>Drop Here</h2>
+</div>
+<div id="resizablecontainer" class="container">
+	<h3>Resizable</h3>
+	<div id="resizable" class="contained">Resize Me</div>
+</div>
+<div id="selectablecontainer" class="widecontainer">
+	<h3>Selectable</h3>
+	<ul id="selectable">
+		<li>One</li>
+		<li>Two</li>
+		<li>Three</li>
+		<li>Four</li>
+		<li>Five</li>
+		<li>Six</li>
+		<li>Seven</li>
+		<li>Eight</li>
+		<li>Nine</li>
+		<li>Ten</li>
+	</ul>
+</div>
+<div id="sortablecontainer" class="widecontainer">
+	<h3>Sortable</h3>
+	<ul id="sortable">
+		<li>One</li>
+		<li>Two</li>
+		<li>Three</li>
+		<li>Four</li>
+		<li>Five</li>
+		<li>Six</li>
+		<li>Seven</li>
+		<li>Eight</li>
+		<li>Nine</li>
+		<li>Ten</li>
+	</ul>
+</div>
+</body>
+</html>

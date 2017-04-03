@@ -1,0 +1,29 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script src="../../jqy-libs/fix-console.js"></script> 
+</head>
+<body>
+<ol id="myOrderedList">
+	<li><a href="http://www.webucator.com/">One</a></li>
+	<li><a href="bind-event-binding.html">Two</a></li>
+	<li class="clickable">Three</li>
+	<li>Four</li>
+</ol>
+<script>
+$('#myOrderedList').on(
+	'click',
+	'li.clickable',
+	function(e) {
+		var $myListItem = $(this);
+		console.log($myListItem.html());
+	}
+);
+
+// Now add items that should also receive the events
+$('#myOrderedList')
+	.append("<li class='clickable'>New Clickable Item</li>")
+	.append("<li>New Unclickable Item</li>");
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$(document).ready(function() {
+	// find all <p>s whose class attribute
+	// ends with "text"
+	$("p[class$='Text']").addClass("italic");
+});
+</script>
+<style>
+.italic { font-style:italic; }
+.redText { color: red; }
+.blueText { color: blue; }
+.greenText { color: green; }
+.yellowBg { background-color: yellow; }
+</style>
+</head>
+<body>
+<p class="redText">I have red text.</p>
+<p class="blueText">I have blue text.</p>
+<p class="greenText">I have green text.</p>
+<p class="yellowBg">I'm a p tag with some other class.</p>
+<p>I'm an ordinary p tag.</p>
+</body>
+</html>

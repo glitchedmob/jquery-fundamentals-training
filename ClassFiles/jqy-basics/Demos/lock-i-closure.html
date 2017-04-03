@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Using Closures</title>
+<script src="../../jqy-libs/jquery.js"></script> 
+</head>
+<body>
+<h1>Using Closures</h1>
+<script>
+// this won't behave as we want it to;
+// every click will alert 5
+for (var i=0; i<5; i++) {
+	$('<p>click me</p>').appendTo('body').click(function() {
+		alert(i);
+	});
+}
+
+$('<hr />').appendTo('body');
+
+// fix: 'close' the value of the parameter j inside createFunction
+// since it was passed by value, each invocation will get its own copy
+var createFunction = function(j) {
+	return function() { alert(j); };
+};
+
+for (var i=0; i<5; i++) {
+	$('<p>click me</p>').appendTo('body').click(createFunction(i));
+}
+</script>
+</body>
+</html>

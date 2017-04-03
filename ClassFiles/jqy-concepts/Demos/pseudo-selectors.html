@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$(document).ready(function() {
+
+	$('tr:odd').addClass('odd');
+	
+	// select all input-like elements in a form
+	$('#myForm :input').addClass('yellowBg');
+
+	// select all the visible elements
+	$('div:visible').addClass('italic');
+	// now unhide the hidden div - it should not be italic
+	$('div:hidden').removeClass('noShow');
+	
+	// all except the first three divs
+	$('div:gt(3)').addClass('redText');
+	
+	// all currently animated divs (not implemented here)
+	$('div:animated');
+});
+</script>
+<style>
+.odd { background-color: #eeeeff; }
+.yellowBg { background-color: yellow; }
+.italic { font-style:italic; }
+.redText { color: red; }
+.noShow { display: none; }
+</style>
+</head>
+<body>
+<div>
+<table border="1" cellspacing="0" cellpadding="8">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Age</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Sue</td>
+			<td>22</td>
+		</tr>
+		<tr>
+			<td>Bill</td>
+			<td>25</td>
+		</tr>
+		<tr>
+			<td>Tom</td>
+			<td>44</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<div>
+<form id="myForm">
+<input type="text" />
+<textarea>Hello</textarea>
+<select>
+	<option>A</option>
+	<option>B</option>
+</select>
+</form>
+</div>
+<div class="noShow">Not initially visible</div>
+<div>The fourth div</div>
+<div>The fifth div</div>
+<hr />
+</body>
+</html>

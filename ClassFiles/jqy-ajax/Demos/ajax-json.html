@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Testing Ajax with JSON</title>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$(document).ready(function() {
+	$.ajax("data/people.json", {
+		type: "get",
+		dataType: "json",
+		success: function(data) {
+			var $list = $('<ol/>').appendTo('#results');
+			$.each(data, function() {
+				$list.append(
+						'<li>' + this.firstName + ' ' + this.lastName + '</li>');
+			});
+		},
+		error: function(xhr, status, err) {
+			$('#results').html("Error " + status + ", " + err);
+		}
+	} );
+});
+</script>
+</head>
+<body>
+<h1>Here are the contents of our JSON data:</h1>
+<div id="results"></div>
+</body>
+</html>

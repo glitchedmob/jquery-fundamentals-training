@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script src="../../jqy-libs/fix-console.js"></script> 
+<script>
+$(document).ready(function() {
+	$('#myList li').each(function(idx, el) {
+		console.log(
+			'Element ' + idx + 
+			' has the following html: ' +
+			$(el).html()
+		);
+	});
+});
+</script>
+</head>
+<body>
+<ul id="myList">
+	<li>A</li>
+	<li class="selected">B</li>
+	<li>C</li>
+	<li>D</li>
+	<li>E</li>
+</ul>
+</body>
+</html>

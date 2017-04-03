@@ -1,0 +1,30 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+</head>
+<body>
+<p>One</p>
+<p>Two</p>
+<p>Three</p>
+<p>Four</p>
+<script>
+var counter = 0;
+
+// Using this as an ordinary HTML element object
+$('p:odd').click(
+	{ type: 'odd' },
+	function(e) {
+		console.log('click ' + e.data["type"] + ": " + this.innerHTML);
+	}
+);
+
+// Using $(this) as a jQuery single-element collection
+$('p:even').click(
+	{ type: 'even' },
+	function(e) {
+		console.log('click ' + e.data["type"] + " - " + $(this).html());
+	}
+);
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Creating and Using jQuery-UI Plugins - Callbacks and Events</title>
+</head>
+<body>
+<h1>Progress Bar 1 (using defaults)</h1>
+<div id="loadingIndicator">&nbsp;</div>
+<h1>Progress Bar 2 (using custom values)</h1>
+
+<script src="../../jqy-libs/jquery.js"></script> 
+<script src="../../jqy-libs/jquery-ui-1.8.9.custom.min.js"></script> 
+<script>
+$.widget('nmk.progressbar', {
+	options: {
+		value: 0,
+		width: 200,
+		color: 'blue',
+		txtColor: 'white'
+	},
+	_create: function() {
+		var progress = this.options.value + '%';
+		this.element
+			.addClass('progressbar')
+			.text(progress)
+			.css({
+				width: this.options.width * progress / 100 + 'px', 
+				backgroundColor: this.options.color,
+				color: this.options.txtColor 
+			});
+	},
+	// create a public method
+	value: function(value) {
+		// no value passed, act as a getter
+		if (value === undefined) {
+			return this.options.value;
+		// value passed, act as a setter
+		} else {
+			this.options.value = this._constrain(value);
+			this._update();
+		}
+	},
+	
+	// create private methods
+	_constrain: function(value) {
+		if (value > 100) {
+				value = 100;
+		}
+		if (value < 0) {
+				value = 0;
+		}
+		return value;
+	},
+	
+	_update: function() {
+		var width = this.options.width * this.options.value / 100;		
+		var progress = this.options.value + '%';
+		this.element.text(progress)
+			.css({'width': width + 'px' });
+		if (this.options.value == 50) {
+			if (this.options.halfway) this.options.halfway(this);
+		}
+		if (this.options.value == 100) {
+			this._trigger('complete', null, { value: 100 });
+		}
+	},
+	
+	// _setOption method
+	_setOption: function(key, value) {
+		if (key === 'value') {
+			this.options.value = this._constrain(value);
+			this._update();
+		} else {
+			this.options[key] = value;
+		}
+		this.element
+			.css({
+				backgroundColor: this.options.color,
+				color: this.options.txtColor 
+			});
+	}
+	
+});
+
+$(document).ready(function() {
+	var $progBar1 = $('#loadingIndicator')
+		.progressbar({halfway: function() { $('<p>Halfway!</p>').insertAfter($progBar1); } });
+	var progress1 = 0;
+	var timer1 = window.setInterval(
+		function() { 
+			$progBar1.progressbar('value', ++progress1); 
+			if (progress1 >= 100) window.clearInterval(timer1);
+		}, 25);
+	
+	var $progBar2 = $('<div>&nbsp;</div>')
+		.appendTo('body')
+		.progressbar( { width: '500', color: '#ffaacc', txtColor: '#0000aa' } )
+		.bind('progressbarcomplete', function(e, data) {
+			alert('Progress bar 2 complete with value ' + data.value + '!');
+			$(this).remove();
+		});
+	var progress2 = 0;
+	var timer2 = window.setInterval(
+		function() { 
+			$progBar2.progressbar('value', ++progress2); 
+			if (progress2 >= 100) window.clearInterval(timer2);
+		}, 50);
+	
+});
+</script>
+</body>
+</html>

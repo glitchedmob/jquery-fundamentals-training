@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script src="../../jqy-libs/fix-console.js"></script> 
+</head>
+<body>
+<form action="#" method="get" id="zipform">
+	Zip: <input type="text" id="zip" name="zip">
+	<input type="submit" value="Go">
+</form>
+<ul id="results">
+</ul>
+<script>
+
+$(document).ready(function() {
+
+	$('#zipform').submit(function() {
+
+		$.ajax({
+			//the base URL, as defined by the service; more info at
+			//http://www.geonames.org/export/wikipedia-webservice.html#findNearbyWikipedia
+			url : 'http://api.geonames.org/findNearbyWikipediaJSON',
+			
+			// tell jQuery we're expecting JSONP
+			dataType : 'jsonp',
+			
+			// supply get parameters to the request:
+			data : {
+				postalcode : $('#zip').val(),
+				country : 'US',
+				radius : '10',
+				username : 'webucator'
+			},
+			
+			// work with the response, knowing that the returned object
+			// contains an array called 'geonames', and each result element
+			// has, among other things, available field include 'title' and 'wikipediaURL'
+			success : function(response) {
+				//clear any previous results:
+				$('#results').html('');
+
+				// iterate over data returned from geonames,
+				// build a list item for each Wikipedia entry returned
+				// with title and Wikipedia link,
+				// and append to ul#results
+				jQuery.map(response.geonames, function(item) {
+					$('#results').append(
+						'<li>' + item.title +
+						' (<a href="http://' + 
+							item.wikipediaUrl +
+								'">View on Wikipedia</a>)' +
+						'</li>'
+					);
+				});
+			},
+			// work with the response
+			error : function(response) {
+				console.log(response);
+			}
+		});
+
+		//prevent form from re-submitting page request
+		return false;
+	});
+});
+
+</script>
+</body>
+</html>

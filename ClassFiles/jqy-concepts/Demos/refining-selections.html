@@ -1,0 +1,46 @@
+<!doctype HTML>
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$(document).ready(function() {
+	// div.foo elements that contain <p>'s
+	$('div.foo').has('p').addClass('big');
+	
+	// h1 elements that don't have a class of bar
+	$('h1').not('.bar').addClass('italic');
+	
+	// unordered list items with class of current 
+	$('ul>li').filter('.current').addClass('redText');
+	
+	// just the first unordered list item
+	$('ul>li').first().addClass('yellowBg');
+	
+	// the sixth
+	$('ul>li').eq(5).addClass('italic');	
+});
+</script>
+<style>
+.big { font-size: 16pt; }
+.yellowBg { background-color: yellow; }
+.italic { font-style:italic; }
+.redText { color: red; }
+</style>
+</head>
+<body>
+<div class="foo">foo div w/o p</div>
+<div class="foo"><p>foo div w/ p</p></div>
+<h1 class="bar">h1 bar</h1>
+<h1>h1</h1>
+<ul>
+	<li class="current">current and the first</li>
+	<li>not current</li>
+	<li class="current">current</li>
+	<li>not current</li>
+	<li class="current">current</li>
+	<li>not current, but the sixth</li>
+	<li class="current">current</li>
+	<li>not current</li>
+</ul>
+</body>
+</html>

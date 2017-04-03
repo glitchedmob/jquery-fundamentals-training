@@ -1,0 +1,39 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+
+$(document).ready(function() {
+	var msg = "";
+	// set the width of all H1 elements
+	$('h1').width('300px');
+	
+	// gets the width of the first H1
+	msg += "Width: " + $('h1').width() + ", ";
+					
+	// sets the height of all H1 elements
+	$('h1').height('150px');
+	
+	// gets the height of the first H1
+	msg += "Height: " + $('h1').height() + "\n";
+	
+	// returns an object containing position
+	// information for the first H1 relative to
+	// its "offset (positioned) parent"
+	msg += 
+		"Top: " + $('h1').position().top + ", " +
+		"Left: " + $('h1').position().left;
+	alert(msg);
+});
+</script>
+<style>
+h1 { background-color:yellow; }
+</style>
+</head>
+<body>
+<h1>First heading</h1>
+<h1>Second heading</h1>
+<h1>Third heading</h1>
+<h1>Fourth heading</h1>
+</body>
+</html>

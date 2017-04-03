@@ -1,0 +1,47 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$(document).ready(function() {
+	$('h1').next('p').addClass('redText');
+	$('input[name=first_name]').closest('form').addClass('yellowBg');
+	$('input[name=first_name]').parent().addClass('redText');
+	$('#myList').children().addClass('redText');
+	
+	// below doesn't work as expected if more than
+	// one element is selected
+	$('li.selected').siblings().addClass('italic');
+	
+	// but this does work as expected
+	$('li:not(.selected)').addClass('blueText');
+});
+</script>
+<style>
+.selected { font-weight:bold; }
+.italic { font-style:italic; }
+.redText { color: red; }
+.yellowBg { background-color:yellow; }
+.blueText { color: blue; }
+label { display: block; }
+</style>
+</head>
+<body>
+<h1>Heading</h1>
+<p>A paragraph (will be red)</p>
+<p>Another paragraph (won't be red)</p>
+<h1>Heading</h1>
+<h3>A heading 3</h3>
+<p>Another paragraph (won't be red)</p>
+<form>
+	<label>First name: <input type="text" name="first_name" /></label>
+	<label>Last name: <input type="text" name="last_name" /></label>
+</form>
+<ul id="myList">
+	<li>A</li>
+	<li class="selected">B</li>
+	<li>C</li>
+	<li>D</li>
+	<li>E</li>
+</ul>
+</body>
+</html>

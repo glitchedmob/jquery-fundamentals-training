@@ -1,0 +1,55 @@
+<html>
+<head>
+<script>
+function useSwitch() {
+	var foo = document.getElementById("fooValue").value;
+	
+	switch (foo) {
+		case 'bar':
+		  alert('the value was bar -- yay!');
+			break;		
+		case 'baz':
+		  alert('boo baz :(');
+			break;		
+		default:
+		  alert('everything else is just ok');
+			break;
+	}
+}
+
+var stuffToDo = {
+	bar : function() { 
+		alert('the value was bar -- yay!');
+	},
+	baz : function() { 
+		alert('boo baz :(');
+	},
+	default : function() { 
+		alert('everything else is just ok');
+	},
+	doSwitch : function(val) {
+		if (this[val]) {
+			this[val]();
+		} else {
+			this['default']();
+		}		
+	}	
+};
+
+function useFunction() {
+	var foo = document.getElementById("fooValue").value;
+	stuffToDo.doSwitch(foo);
+}
+</script>
+</head>
+<body>
+<h1>Foo Selector</h1>
+<h3>Please note: &quot;yo&quot; is not currently supported.</h3>
+<select id="fooValue">
+	<option value="bar">bar</option>
+	<option value="baz">baz</option>
+	<option value="yo">yo</option>
+</select>
+<button onclick="useSwitch();">Switch</button>
+<button onclick="useFunction();">Function</button>
+</body>

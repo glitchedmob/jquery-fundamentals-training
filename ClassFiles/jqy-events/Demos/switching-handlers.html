@@ -1,0 +1,23 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script src="../../jqy-libs/fix-console.js"></script> 
+</head>
+<body>
+<p>One</p>
+<p>Two</p>
+<p>Three</p>
+<p>Four</p>
+<script>
+$('p').one(
+	'click',
+	function() {
+		console.log('You just clicked this for the first time!');
+		$(this).click(
+			function() { console.log('You have clicked this before!'); }
+		);
+	}
+);
+</script>
+</body>
+</html>

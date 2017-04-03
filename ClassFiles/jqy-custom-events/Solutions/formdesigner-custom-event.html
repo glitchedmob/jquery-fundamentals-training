@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FormDesigner - Custom Events</title>
+<style>
+h4 { text-align: center; border-bottom: 2px solid black; }
+.left { text-align: left; }
+#ui {
+	position:absolute;
+	top:100px;
+	right:10px;
+	height:400px;
+	width:500px;
+	border:5px ridge #000077;
+	background-color:#CCCCff;	
+	padding:24px;
+}
+#dialog {
+	position:absolute;
+	top:100px;
+	left:10px;
+	height:200px;
+	width:600px;
+	border:5px ridge blue;
+	background-color:#CCCCCC;	
+	padding:24px;
+}
+table.dialog {
+	width:100%;
+}
+</style>
+<script src="../../jqy-libs/jquery.js"></script>
+<script>
+$(document).ready(function() {
+	var $dialog = $('#dialog');
+	var $ui = $('#ui');
+	$dialog.tbLabel = $dialog.find('[name=tbLabel]');
+	$dialog.tbName = $dialog.find('[name=tbName]');
+	// get the values associated with adding a check box
+	$dialog.cbLabel = $dialog.find('[name=cbLabel]');
+	$dialog.cbName = $dialog.find('[name=cbName]');
+	$dialog.cbValue = $dialog.find('[name=cbValue]');
+	
+	$dialog.find('[name=addTB]').click(
+		function(e) {
+			$dialog.triggerHandler(
+				"addTextBox",
+				{
+					label: $dialog.tbLabel.val(), // values from other elements
+					name: $dialog.tbName.val()    // in the dialog
+				}
+			);
+		}
+	);
+	// bind a click handler for the checkbox Add button
+	$dialog.find('[name=addCB]').click(
+		function(e) {
+			$dialog.triggerHandler(
+				"addCheckBox",
+				{
+					label: $dialog.cbLabel.val(), // values from other elements
+					name: $dialog.cbName.val(),   // in the dialog
+					value: $dialog.cbValue.val()
+				}
+			);
+		}
+	);
+
+	// in the ui div
+	$ui.addTextBox = function(e, data) {
+		$ui.children('form').append($(
+		      '<label>' + data.label + 
+					'<input type="text" name="' + data.name + '"/></label><br />'));
+	};
+	$dialog.bind(
+		"addTextBox",     // event name we made up
+		$ui.addTextBox	  // function in the ui
+	);
+	// define an addCheckBox function for ui
+	$ui.addCheckBox = function(e, data) {
+		$ui.children('form').append($(
+		      '<label>' + data.label + 
+					'<input type="checkbox" name="' + data.name + 
+					'" value="' + data.value + '"/></label><br />'));
+					alert(
+		      '<label>' + data.label + 
+					'<input type="checkbox" name="' + data.name + 
+					'" value="' + data.value + '"/></label><br />');
+	};
+	// bind it as a handler for an addCheckBox event
+	$dialog.bind(
+		"addCheckBox",     // event name we made up
+		$ui.addCheckBox	  // function in the ui
+	);
+	
+});
+</script>
+</head>
+<body>
+<h3>In this example, the designer dialog fires a custom event, which the UI registers
+	for.</h3>
+<div id="ui">
+	<h4>This is the UI.</h4>
+	<form action="javascript:void 0;"></form>
+</div>
+<div id="dialog">
+	<h4>This is the dialog.</h4>
+	<form action="javascript:void 0;">
+		<table class="dialog">
+			<tbody>
+				<tr>
+					<th colspan="6" class="left">Add Text Box </th>
+				</tr>
+				<tr>
+					<td>Name:</td><td><input type="text" name="tbName"></td>
+					<td>Label:</td><td colspan="3"><input type="text" name="tbLabel"></td>
+				</tr>
+				<tr>
+					<th colspan="6"><input type="button" name="addTB" value="   Add   "></th>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr>
+					<th colspan="6" class="left">Add Check Box </th>
+				</tr>
+				<tr>
+					<td>Name:</td><td><input type="text" name="cbName"></td>
+					<td>Label:</td><td><input type="text" name="cbLabel"></td>
+					<td>Value:</td><td><input type="text" name="cbValue"></td>
+				</tr>
+				<tr>
+					<th colspan="6"><input type="button" name="addCB" value="   Add   "></th>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+	<title>Using an Object Literal to Encapsulate Functionality</title>
+</head>
+<body>
+<p>Nothing to show here.</p>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+var myFeature = {
+	message : 'hello',
+	config: { logger : function(x) { window.alert(x); } },
+	
+	showMsg : function() {
+		this.config.logger(this.message);
+	},
+	
+	init : function(config) {
+		$.extend(this.config, config);
+	},
+	
+	readConfig : function() {
+		$.each(this.config, $.proxy(function(k, v) {
+			this.config.logger(k + ': ' + v);
+		}, this));
+	}
+};
+
+console.log(myFeature.message); // logs 'hello'
+myFeature.showMsg();            // alerts 'hello'
+myFeature.message = 'goodbye';  // replace message
+myFeature.init({                // replaces alert with console.log
+	logger : console.log
+});
+myFeature.readConfig();         // logs config object
+</script>
+</body>
+</html>

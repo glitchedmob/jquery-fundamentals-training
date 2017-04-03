@@ -1,0 +1,19 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+</head>
+<body>
+<p><a href="http://www.webucator.com/">One</a></p>
+<p><a href="bind-event-binding.html">Two</a></p>
+<p>Three</p>
+<p>Four</p>
+<script>
+$('a').click(function(e) {
+    var $this = $(this);
+    if ($this.attr('href').match('http://')) {
+        e.preventDefault();
+    }
+});
+</script>
+</body>
+</html>

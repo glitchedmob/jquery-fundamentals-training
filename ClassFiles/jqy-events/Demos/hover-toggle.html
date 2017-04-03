@@ -1,0 +1,67 @@
+<html>
+<head>
+<style>
+.hover { background-color:#CCFFCC; }
+.toggle1 { color: red; }
+.toggle2 { color: green; }
+.toggle3 { color: blue; }
+</style>
+<!--
+* the toggle event was removed from jQuery on version 1.9, include 1.8 to ensure our demo works. 
+-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+</head>
+<body>
+<ul id="myUnorderedList">
+	<li><a href="http://www.webucator.com/">One</a></li>
+	<li><a href="bind-event-binding.html">Two</a></li>
+	<li>Three</li>
+	<li>Four</li>
+</ul>
+<ol id="myOrderedList">
+	<li><a href="http://www.webucator.com/">One</a></li>
+	<li><a href="bind-event-binding.html">Two</a></li>
+	<li class="clickable">Three</li>
+	<li>Four</li>
+</ol>
+<script>
+
+$('ul li').hover(function() { 
+    $(this).toggleClass('hover'); 
+});
+
+$('ol li').hover(
+	function() { 
+    $(this).addClass('hover'); 
+	},
+	function() { 
+    $(this).removeClass('hover'); 
+	}
+);
+
+$('li').toggle(
+	function() { 
+    $(this).addClass('toggle1'); 
+    $(this).removeClass('toggle2'); 
+    $(this).removeClass('toggle3'); 
+	},
+	function() { 
+    $(this).addClass('toggle2'); 
+    $(this).removeClass('toggle1'); 
+    $(this).removeClass('toggle3'); 
+	},
+	function() { 
+    $(this).addClass('toggle3'); 
+    $(this).removeClass('toggle2'); 
+    $(this).removeClass('toggle1'); 
+	},
+		function() { 
+    $(this).removeClass('toggle3'); 
+    $(this).removeClass('toggle2'); 
+    $(this).removeClass('toggle1'); 
+	}
+);
+
+</script>
+</body>
+</html>

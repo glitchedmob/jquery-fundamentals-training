@@ -1,0 +1,17 @@
+// a self-executing anonymous function
+(function() {
+    var baz = 1;
+    var bim = function() { alert(baz); };
+    bar = function() { alert(baz); };
+})();
+
+console.log(baz);  // baz is not defined outside of the function
+
+bar();  // bar is defined outside of the anonymous function 
+        // because it wasn't declared with var; furthermore,
+        // because it was defined in the same scope as baz,
+        // it has access to baz even though other code
+        // outside of the function does not
+
+bim();  // bim is not defined outside of the anonymous function,
+        // so this will result in an error

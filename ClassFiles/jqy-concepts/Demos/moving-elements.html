@@ -1,0 +1,31 @@
+<!doctype HTML>
+<html>
+<head>
+<style>
+.current { color: red; }
+.italic { font-style: italic; }
+</style>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$(document).ready(function() {
+// make the first list item the last list item
+$('#myList li:first').appendTo('#myList').addClass('current');
+
+// another approach to the same problem
+$('#myList').append($('#myList li:first')).addClass('italic');
+
+// note that there's no way to access the
+// list item that we moved, as this returns
+// the list itself
+});
+</script>
+</head>
+<body>
+<ul id="myList">
+	<li>First</li>
+	<li>Second</li>
+	<li>Third</li>
+	<li>Fourth</li>
+</ul>
+</body>
+</html>

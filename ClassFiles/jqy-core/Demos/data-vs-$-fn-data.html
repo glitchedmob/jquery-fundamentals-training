@@ -1,0 +1,41 @@
+<!doctype HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Using $.data Instead of $.fn.data</title>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+jQuery(document).ready(function() {
+	
+	$('#dataDiv>h2').each(function() {
+		var $h2 = $(this);
+		var $p = $h2.next('p');
+		// since we had to create a collection $h2 to use next()
+		// we might as well use $.fn.data on $h2
+		$h2.data('para', $p);
+		// but, we could do this instead
+		//$.data(this, 'para', $p);
+	});
+
+	// Later, because the event handler has the DOM element as this,
+	// and there is no other reason to create a collection,
+	// we can use $.data
+	$('#dataHeading').click(
+		function(e) {
+			$.data(this, 'para').html('New Content from Data');
+		}
+	);
+
+});
+</script>
+</head>
+<body>
+<h1>Using <code>$.data</code> Instead of <code>$.fn.data</code></h1>
+<h2>For Retrieving Data Associated with an Element</h2>
+<hr />
+<div id="dataDiv">
+	<h2 id="dataHeading">Using <code>$.data</code></h2>
+	<p>Click the heading above to see information from data.</p>
+</div>
+</body>
+</html>

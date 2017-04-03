@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Widgets</title>
+	<script src="../../jqy-libs/jquery.js"></script>
+	<script src="../../jqy-libs/jquery-ui-1.10.3.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../jqy-libs/ui-lightness/jquery-ui-1.10.3.custom.min.css">
+	<script>
+		$(document).ready(function() {
+			$('#acc').accordion();
+			 var mylist = [
+					"one",
+					"two",
+					"three",
+					"four",
+					"five"
+				];
+				$('#search').autocomplete({
+					source: mylist
+				});
+				$('#dp').datepicker();
+		});
+	</script>
+	<style>
+		#acc {
+			width:32%;
+			margin-right:1%;
+			float:left;
+		}
+		#autocompletecontainer {
+			width:32%;
+			margin-right:1%;
+			float:left;
+		}
+		#datepickercontainer {
+			width:32%;
+			float:left;
+		}
+	</style>
+</head>
+<body>
+<div id="acc">
+	<h3>Item 1</h3>
+	<div>
+		<p>content 1 content 1 content 1</p>
+	</div>
+	<h3>Item 2</h3>
+	<div>
+		<p>content 2 content 2 content 2</p>
+	</div>
+	<h3>Item 3</h3>
+	<div>
+		<p>content 3 content 3 content 3</p>
+	</div>
+</div>
+<div id="autocompletecontainer">
+	<label for="search">Start typing (try "o" or "t"):</label> 
+    <input type="text" name="search" id="search">
+</div>
+<div id="datepickercontainer">
+	<label for="dp">Select date:</label> 
+    <input type="text" name="dp" id="dp">
+</div>
+</body>
+</html>

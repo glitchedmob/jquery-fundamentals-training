@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FormDesigner - Push Strategy</title>
+<style>
+h4 { text-align: center; border-bottom: 2px solid black; }
+.left { text-align: left; }
+#ui {
+	position:absolute;
+	top:100px;
+	right:10px;
+	height:400px;
+	width:500px;
+	border:5px ridge #000077;
+	background-color:#CCCCff;	
+	padding:24px;
+}
+#dialog {
+	position:absolute;
+	top:100px;
+	left:10px;
+	height:200px;
+	width:500px;
+	border:5px ridge blue;
+	background-color:#CCCCCC;	
+	padding:24px;
+}
+table.dialog {
+	width:100%;
+}
+</style>
+<script src="../../jqy-libs/jquery.js"></script>
+<script>
+$(document).ready(function() {
+	// in the ui object
+	var $ui = $('#ui');
+	
+	// this is the method that adds a text box
+	$ui.addTextBox = function(data) {
+		$ui.children('form').append($(
+			'<label>' + data.label + 
+			' <input type="text" name="' + data.name + '"/></label><br />'));
+	}
+
+	// in the dialog
+	var $dialog = $('#dialog');
+	$dialog.label = $dialog.find('[name=label]');
+	$dialog.name = $dialog.find('[name=name]');
+	// push the event to the handler
+	$dialog.find('[name=add]').click(
+		function(e) {
+			$ui.addTextBox(
+				{
+					label: $dialog.label.val(), // values from other elements
+					name: $dialog.name.val(),   // in the dialog
+				}
+			);
+		}
+	);
+});
+</script>
+</head>
+<body>
+<h3>In this example, the designer dialog pushes information to the UI object
+	by invoking its methods.</h3>
+<div id="ui">
+
+	<h4>This is the UI.</h4>
+	<form action="javascript:void 0;"></form>
+</div>
+<div id="dialog">
+	<h4>This is the dialog.</h4>
+	<form action="javascript:void 0;">
+		<table class="dialog">
+			<thead>
+				<tr><th colspan="4" class="left">Add Element</th></tr>
+
+			</thead>
+			<tbody>
+				<tr>
+					<td>Name:</td><td><input type="text" name="name"></td>
+					<td>Label:</td><td><input type="text" name="label"></td>
+				</tr>
+				<tr>
+					<th colspan="4"><input type="button" name="add" value="   Add   "></th>
+
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+</body>
+</html>

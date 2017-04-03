@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>jQuery Fundamentals :: Lazy Loading</title>
+	<link href="../../jqy-css/reset.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../../jqy-css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<style>
+		.disclosure { border: 5px ridge #aa7777; padding: 4px }
+		.disclosure .content { display: none; border: 1px solid blue;  padding: 4px}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<div id="logo" rel="logo"><a href="index.html">jQuery Fundamentals</a></div>
+		<ul id="nav">
+			<li class="selected"><a href="http://docs.jquery.com">jQuery Docs</a></li>
+			<li><a href="sandbox.html">Sandbox</a></li>
+			<li>Resources
+				<ul>
+					<li><a href="http://groups.google.com/group/jquery-en">Google Group</a></li>
+					<li><a href="http://stackoverflow.com">Stack Overflow</a></li>
+					<li><a href="http://delicious.com/rdmey/jquery-class">Delicious Bookmarks</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="disclosure">
+		<h3 class="control">Edit Content</h3>
+		<div class="content"></div>
+	</div>
+	
+<script src="../../jqy-libs/jquery.js"></script> 
+<script src="../../jqy-libs/fix-console.js"></script> 
+<script>
+$(document).ready(
+	function() {
+		$('.disclosure .control').each(function() {
+			var $this = $(this);
+			var $div = $this.next('div.content');
+			$this.one('click',
+				function(e) {
+					$div.html("<p>Some</p><p>New</p><p>Content</p>");
+					$div.slideDown();
+					$this.click(
+						function() {
+							$div.slideToggle();
+						}
+					);
+				}
+			);
+		});
+	}
+);
+</script>
+</body>
+</html>

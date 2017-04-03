@@ -1,0 +1,7 @@
+/* this won't behave as we want it to; */
+/* every click will alert 5 */
+for (var i=0; i<5; i++) {
+    $('<p>click me</p>').appendTo('body').click(function() {
+        alert(i);
+    });
+}

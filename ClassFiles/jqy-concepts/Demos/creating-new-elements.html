@@ -1,0 +1,33 @@
+<html>
+<head>
+<style>
+.new { background-color:#CCCCCC; }
+</style>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$(document).ready(function() {
+	// simple elements
+	$('<p>A new paragraph!</p><p>Another new paragraph!</p>')
+		.prependTo($('body'));
+	$('<li class="new">new list item</li>').appendTo($('#myList'));
+	$('body').append('<p>This is another new paragraph!</p>');	
+	
+	// element with attributes object
+	$('<a/>', { 
+		html : 'This is a <em>new</em> link',
+		'class' : 'new',
+		href : 'foo.html'
+	}).appendTo($('body'));		
+});
+</script>
+</head>
+<body>
+<ul id="myList">
+	<li>First</li>
+	<li>Second</li>
+	<li>Third</li>
+	<li>Fourth</li>
+</ul>
+<hr />
+</body>
+</html>

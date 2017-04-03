@@ -1,0 +1,61 @@
+<html>
+<head>
+<style>
+.redText { color: red; }
+</style>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script src="../../jqy-libs/fix-console.js"></script> 
+</head>
+<body>
+<div>
+	<a class="special" href="http://www.webucator.com/">Webucator</a>
+	<a class="special" href="index.html">Home</a>
+	<a class="special" href="more.html">More</a>
+</div>
+<p class="special">This is special, too!</p>
+<div class="special">
+	<a href="http://www.webucator.com/">Webucator</a>
+	<a href="index.html">Home</a>
+	<a href="more.html">More</a>
+</div>
+<div>
+	<a href="http://www.webucator.com/">Webucator</a>
+	<a href="index.html">Home</a>
+	<a href="more.html">More</a>
+</div>
+<p>This is not special!</p>
+<script>
+// filter only
+(function($){
+	$.fn.showLinkLocations1 = function() {
+		return this.filter('a').each(function(){
+			$(this).append(' (' + $(this).attr('href') + ')');
+		}).end();
+	};
+}(jQuery));
+
+// find only
+(function($){
+	$.fn.showLinkLocations2 = function() {
+		return this.find('a').each(function(){
+			$(this).append(' (' + $(this).attr('href') + ')');
+		}).end();
+	};
+}(jQuery));
+
+// both find and filter
+(function($){
+	$.fn.showLinkLocations = function() {
+		return this.find('a').each(function(){
+			$(this).append(' (' + $(this).attr('href') + ')');
+		}).end().filter('a').each(function(){
+			$(this).append(' (' + $(this).attr('href') + ')');
+		}).end();
+	};
+}(jQuery));
+    
+// Usage example:
+$('.special').showLinkLocations().css( { fontSize: '20pt'} );
+</script>
+</body>
+</html>

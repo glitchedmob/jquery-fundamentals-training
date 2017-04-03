@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Basic Effects</title>
+<style>
+.funtimes {
+	font-size:24px;
+	font-weight: bold;
+	background-color: #aa7700;
+	width: 200px;
+	display: none;
+	padding-top: 86px;
+	padding-bottom: 90px;
+	text-align: center;
+}
+.blue {
+	background-color: blue;
+}
+#div1 {
+	position :absolute;
+	top: 50px;
+	left: 300px;
+}
+#div2 {
+	position: absolute;
+	top: 300px;
+	left: 100px;
+	opacity: 0.5;
+}
+</style>
+</head>
+<body>
+<div id="div1" class="funtimes">Fun</div>
+<div id="div2" class="funtimes">Fun</div>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$('#div1')       // try changing to '.funtimes'
+	.fadeIn(1000)
+	.delay(1000)
+	.fadeOut(1000);
+$('#div2')
+	.fadeIn(1000)
+	.queue(function() { $(this).addClass('blue').dequeue(); })
+	.delay(1000)
+	.fadeOut(1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script src="../../jqy-libs/fix-console.js"></script> 
+</head>
+<body>
+<p>One</p>
+<p>Two</p>
+<p>Three</p>
+<p>Four</p>
+<script>
+
+// Using this as an ordinary HTML element object
+$('p:odd').click(function() {
+    console.log('click odd' + ": " + this.innerHTML);
+});
+
+// Using $(this) as a jQuery single-element collection
+$('p:even').click(function() {
+    console.log('click even' + " - " + $(this).html());
+});
+</script>
+</body>
+</html>

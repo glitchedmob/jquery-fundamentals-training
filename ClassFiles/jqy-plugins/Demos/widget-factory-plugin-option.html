@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Creating &amp; Using jQuery-UI Plugins - Setting Options</title>
+</head>
+<body>
+<h1>Progress Bar 1 (using defaults)</h1>
+<div id="loadingIndicator">&nbsp;</div>
+<h1>Progress Bar 2 (using custom values)</h1>
+
+<script src="../../jqy-libs/jquery.js"></script> 
+<script src="../../jqy-libs/jquery-ui-1.8.9.custom.min.js"></script> 
+<script>
+$.widget('nmk.progressbar', {
+	options: {
+		value: 0,
+		width: 200,
+		color: 'blue',
+		txtColor: 'white'
+	},
+	_create: function() {
+		var progress = this.options.value + '%';
+		this.element
+			.addClass('progressbar')
+			.text(progress)
+			.css({
+				width: this.options.width * progress / 100 + 'px', 
+				backgroundColor: this.options.color,
+				color: this.options.txtColor 
+			});
+	},
+	// create a public method
+	value: function(value) {
+		// no value passed, act as a getter
+		if (value === undefined) {
+			return this.options.value;
+		// value passed, act as a setter
+		} else {
+			this.options.value = this._constrain(value);
+			this._update();
+		}
+	},
+	
+	// create private methods
+	_constrain: function(value) {
+		if (value > 100) {
+				value = 100;
+		}
+		if (value < 0) {
+				value = 0;
+		}
+		return value;
+	},
+	
+	_update: function() {
+		var width = this.options.width * this.options.value / 100;		
+		var progress = this.options.value + '%';
+		this.element.text(progress)
+			.css({'width': width + 'px' });
+	},
+	
+	// _setOption method
+	_setOption: function(key, value) {
+		if (key === 'value') {
+			this.options.value = this._constrain(value);
+			this._update();
+		} else {
+			this.options[key] = value;
+		}
+		this.element
+			.css({
+				backgroundColor: this.options.color,
+				color: this.options.txtColor 
+			});
+	}
+	
+});
+
+$(document).ready(function() {
+	var $progBar1 = $('#loadingIndicator')
+		.progressbar();
+	var progress1 = 0;
+	var timer1 = window.setInterval(
+		function() { 
+			$progBar1.progressbar('value', ++progress1); 
+			if (progress1 >= 100) window.clearInterval(timer1);
+		}, 25);
+	
+	var $progBar2 = $('<div>&nbsp;</div>')
+		.appendTo('body')
+		.progressbar( { width: '500', color: '#ffaacc', txtColor: '#0000aa' } );
+	var progress2 = 0;
+	var timer2 = window.setInterval(
+		function() { 
+			$progBar2.progressbar('value', ++progress2); 
+			if (progress2 >= 100) window.clearInterval(timer2);
+		}, 50);
+	
+	$('<h1>Progress Bar 3 (using _setOption)</h1>').appendTo('body');
+	var $progBar3 = $('<div>&nbsp;</div>')
+		.appendTo('body')
+		.progressbar();
+	$progBar3.progressbar( 
+		'option', { width: 100, color: '#ffccaa', txtColor: '#000000' }
+	);
+	var progress3 = 0;
+	var timer3 = window.setInterval(
+		function() { 
+			$progBar3.progressbar('value', ++progress3); 
+			if (progress3 >= 100) window.clearInterval(timer3);
+		}, 75);
+	
+});
+</script>
+</body>
+</html>

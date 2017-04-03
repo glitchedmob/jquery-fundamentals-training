@@ -1,0 +1,38 @@
+<html>
+<head>
+<style>
+.redText { color: red; }
+</style>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script>
+$(document).ready(function() {
+	// Manipulating single attributes
+	$('#myDiv a:first').attr('href', 'newDestination.html');
+	
+	// Manipulating multiple attributes
+	$('#myDiv a:first').attr({
+		href : 'newDestination.html',
+		rel : 'super-special'
+	}).html('New Destination');
+	
+	// Manipulating attributes using a function
+	$('#myDiv a:last').attr({
+		rel : 'super-special',
+		href : function() { 
+			return 'new/' + $(this).attr('href');
+		}
+	}).html('new/Destination');
+
+	// just to verify that the rel attribute got set
+	$('#myDiv [rel=super-special]').addClass("redText");	
+});
+</script>
+</head>
+<body>
+<div id="myDiv">
+	<a target="popup" href="#">Old destination (here).</a>
+	<a target="popup" href="#">Old destination (here).</a>
+	<a target="popup" href="#">Old destination (here).</a>
+</div>
+</body>
+</html>

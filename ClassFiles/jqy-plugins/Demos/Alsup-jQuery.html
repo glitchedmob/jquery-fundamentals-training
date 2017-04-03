@@ -1,0 +1,32 @@
+<html>
+<head>
+<script src="../../jqy-libs/jquery.js"></script> 
+<script src="Alsup-jQuery.js"></script>
+</head>
+<body>
+<p class="default">This uses the defaults.</p>
+<p class="override">This overrides with instance options.</p>
+<p class="data">This overrides with data and instance options.</p>
+<p class="format">This is hilighted after modifying 
+	global format function.</p>
+
+<script>
+$('p.default').hilight();
+
+$('p.override').hilight( 
+		{ foreground: 'blue', background: '#eeddff' }
+	);
+
+$('p.data')
+	.data('foreground', 'green')
+	.hilight( { foreground: 'blue', background: '#eeddff' }	);
+
+$.fn.hilight.format = function(txt) {
+	return '<em>' + txt + '</em>';
+};
+
+$('p.format').hilight();
+
+</script>
+</body>
+</html>
