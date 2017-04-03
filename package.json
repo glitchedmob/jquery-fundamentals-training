@@ -1,0 +1,22 @@
+{
+  "name": "jquery-fundamentals-training",
+  "version": "1.0.0",
+  "description": "jquery fundamentals training",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glitchedmob/jquery-fundamentals-training.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glitchedmob/jquery-fundamentals-training/issues"
+  },
+  "homepage": "https://github.com/glitchedmob/jquery-fundamentals-training#readme",
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
